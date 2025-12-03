@@ -17,7 +17,7 @@ class UserController extends Controller
         $incomingData["password"] = bcrypt($incomingData["password"]);
         $user = User::create($incomingData);
         auth()->login($user);
-        return redirect("/");
+        return redirect("/page1");
     }
 
 
@@ -32,7 +32,7 @@ class UserController extends Controller
             "password" => $credentials["loginPassword"]
             ])){
                 $request->session()->regenerate();
-                return redirect()->indended("/page1");
+                return redirect()->intended("/page1");
         }else{
             return redirect("/")->withErrors([
                 "loginError" => "Invalid credentials"
@@ -42,7 +42,7 @@ class UserController extends Controller
 
     public function page1(Request $request){
         $user = auth()->user();
-        return post("page1", ["user" => $user]);
+        return view("page1", ["user" => $user]);
     }
 
 

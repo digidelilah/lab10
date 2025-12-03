@@ -17,8 +17,15 @@ use App\Http\Controllers\UserController;
 Route::get('/', function () {
     return view('home');
 });
-
-
+//page1 route
+Route::get("page1",function(){
+    $user = auth()->user()?->name;
+    return view("page1", ["user" => $user]);
+});
+//registar get
+Route::get('/register', function () {
+    return view('register');
+});
 
 //user auth routes
 Route::post('/register', [UserController::class, "register"]);
@@ -26,5 +33,4 @@ Route::post("/logout",[UserController::class, "logout"]);
 Route::post("/login",[UserController::class, "login"]);
 
 
-//page1 route
-Route::post("/page1",[UserController::class, "page1"]);
+
